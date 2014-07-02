@@ -17,6 +17,8 @@ local drop      = require("scratchdrop")
 local lain      = require("lain")
 local bling     = require("blingbling")
 local blingglue = require("blingbling.udisks_glue")
+local r         = require("runonce")
+
 -- }}}
 
 -- {{{ Error handling
@@ -50,15 +52,15 @@ function run_once(cmd)
   awful.util.spawn_with_shell("pgrep -u $USER -x " .. findme .. " > /dev/null || (" .. cmd .. ")")
 end
 
-run_once("unity-settings-daemon")
-run_once("compton")
-run_once("nm-applet")
-run_once("udiskie --tray")
-run_once("indicator-cpufreq")
-run_once("indicator-sound-switcher")
-run_once("tomboy")
-run_once("volumeicon")
-awful.util.spawn_with_shell("xmodmap -e 'keycode 65 = space F12'")
+r.run("unity-settings-daemon")
+r.run("compton")
+r.run("nm-applet")
+r.run("udiskie --tray")
+r.run("indicator-cpufreq")
+r.run("indicator-sound-switcher")
+r.run("tomboy")
+r.run("volumeicon")
+r.run("xmodmap -e 'keycode 65 = space F12'")
 
 -- }}}
 
