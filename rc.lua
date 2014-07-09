@@ -132,47 +132,6 @@ lain.widgets.calendar:attach(mytextclock, { font_size = 10 })
 -- Mail IMAP check
 mailicon = wibox.widget.imagebox(beautiful.widget_mail)
 mailicon:buttons(awful.util.table.join(awful.button({ }, 1, function () awful.util.spawn(mail) end)))
---[[ commented because it needs to be set before use
-mailwidget = wibox.widget.background(lain.widgets.imap({
-    timeout  = 180,
-    server   = "server",
-    mail     = "mail",
-    password = "keyring get mail",
-    settings = function()
-        if mailcount > 0 then
-            widget:set_text(" " .. mailcount .. " ")
-            mailicon:set_image(beautiful.widget_mail_on)
-        else
-            widget:set_text("")
-            mailicon:set_image(beautiful.widget_mail)
-        end
-    end
-}), "#313131")
-]]
-
--- MPD
---mpdicon = wibox.widget.imagebox(beautiful.widget_music)
---mpdicon:buttons(awful.util.table.join(awful.button({ }, 1, function () awful.util.spawn_with_shell(musicplr) end)))
---mpdwidget = lain.widgets.mpd({
-    --settings = function()
-        --if mpd_now.state == "play" then
-            --artist = " " .. mpd_now.artist .. " "
-            --title  = mpd_now.title  .. " "
-            --mpdicon:set_image(beautiful.widget_music_on)
-        --elseif mpd_now.state == "pause" then
-            --artist = " mpd "
-            --title  = "paused "
-        --else
-            --artist = ""
-            --title  = ""
-            --mpdicon:set_image(beautiful.widget_music)
-        --end
-
-        --widget:set_markup(markup("#EA6F81", artist) .. title)
-    --end
---})
---mpdwidgetbg = wibox.widget.background(mpdwidget, "#313131")
---
 
 -- MEM
 memicon = wibox.widget.imagebox(beautiful.widget_mem)
@@ -329,14 +288,6 @@ for s = 1, screen.count() do
     right_layout:add(spr)
     right_layout:add(arrl)
     right_layout:add(arrl_ld)
-    --right_layout:add(mpdicon)
-    --right_layout:add(mpdwidgetbg)
-    --right_layout:add(arrl_dl)
-    --right_layout:add(volicon)
-    --right_layout:add(volumewidget)
-    --right_layout:add(arrl_ld)
-    --right_layout:add(mailicon)
-    --right_layout:add(mailwidget)
     right_layout:add(arrl_dl)
     right_layout:add(memicon)
     right_layout:add(memwidget)
@@ -493,58 +444,14 @@ globalkeys = awful.util.table.join(
         function ()
             awful.util.spawn("/usr/local/bin/kbdlight down")
         end),
-    -- ALSA volume control
-    --awful.key({ }, "XF86AudioRaiseVolume",
-        --function ()
-            --awful.util.spawn("amixer -c 1 sset Master 5+")
-            --volumewidget.update()
-        --end),
-    --awful.key({ }, "XF86AudioLowerVolume",
-        --function ()
-            --awful.util.spawn("amixer -c 1 sset Master 5-")
-            --volumewidget.update()
-        --end),
-    --awful.key({ }, "XF86AudioMute",
-        --function ()
-            --awful.util.spawn("amixer -c 1 sset Master 0")
-            --volumewidget.update()
-        --end),
-    --awful.key({ altkey, "Control" }, "m",
-        --function ()
-            --awful.util.spawn("amixer -c 1 sset Master 100")
-            --volumewidget.update()
-        --end),
-
-    -- MPD control
-    --awful.key({ altkey, "Control" }, "Up",
-        --function ()
-            --awful.util.spawn_with_shell("mpc toggle || ncmpcpp toggle || ncmpc toggle || pms toggle")
-            --mpdwidget.update()
-        --end),
-    --awful.key({ altkey, "Control" }, "Down",
-        --function ()
-            --awful.util.spawn_with_shell("mpc stop || ncmpcpp stop || ncmpc stop || pms stop")
-            --mpdwidget.update()
-        --end),
-    --awful.key({ altkey, "Control" }, "Left",
-        --function ()
-            --awful.util.spawn_with_shell("mpc prev || ncmpcpp prev || ncmpc prev || pms prev")
-            --mpdwidget.update()
-        --end),
-    --awful.key({ altkey, "Control" }, "Right",
-        --function ()
-            --awful.util.spawn_with_shell("mpc next || ncmpcpp next || ncmpc next || pms next")
-            --mpdwidget.update()
-        --end),
 
     -- Copy to clipboard
     awful.key({ modkey }, "c", function () os.execute("xsel -p -o | xsel -i -b") end),
 
     -- User programs
     awful.key({ modkey }, "q", function () awful.util.spawn(browser) end),
-    awful.key({ modkey }, "i", function () awful.util.spawn(browser2) end),
     awful.key({ modkey }, "s", function () awful.util.spawn(gui_editor) end),
-    awful.key({ modkey }, "g", function () awful.util.spawn(graphics) end),
+    awful.key({ modkey }, "i", function () os.execute("xdotool click 3") end),
 
     -- Prompt
     awful.key({ modkey }, "r", function () mypromptbox[mouse.screen]:run() end),
