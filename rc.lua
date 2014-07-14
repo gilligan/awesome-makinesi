@@ -419,7 +419,8 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Shift"   }, "q",      awesome.quit),
 
     -- Dropdown terminal
-    awful.key({ altkey,	          }, "Escape",      function () drop(terminal) end),
+    -- awful.key({ altkey,	          }, "Escape",      function () drop(terminal) end),
+    -- NOTE : Use tilda instead
 
     -- Widgets popups
     awful.key({ altkey,           }, "c",      function () lain.widgets.calendar:show(7) end),
@@ -540,17 +541,12 @@ awful.rules.rules = {
                      keys = clientkeys,
                      buttons = clientbuttons,
 	                   size_hints_honor = false } },
-    { rule = { class = "URxvt" },
-          properties = { opacity = 0.99 } },
 
     { rule = { class = "MPlayer" },
           properties = { floating = true } },
 
-    { rule = { class = "Dwb" },
-          properties = { tag = tags[1][1] } },
-
-    { rule = { class = "Iron" },
-          properties = { tag = tags[1][1] } },
+    { rule = { class = "Tilda" },
+          properties = { floating = true } },
 
     { rule = { instance = "plugin-container" },
           properties = { tag = tags[1][1] } },
