@@ -59,8 +59,9 @@ r.run("udiskie --tray")
 r.run("indicator-cpufreq")
 r.run("indicator-sound-switcher")
 r.run("tomboy")
-r.run("volumeicon")
-r.run("xmodmap -e 'keycode 65 = space F12'")
+r.run("tilda")
+r.run("xcape -e 'Control_L=Escape;Shift_R=parenright;Shift_L=parenleft'")
+awful.util.spawn_with_shell("xmodmap ~/.Xmodmap")
 
 -- }}}
 
